@@ -17,17 +17,24 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Product extends Model
+
+
+
+
+
+ class Product extends Model
 {
-    
+
     protected $perPage = 20;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = ['descripcion', 'precio', 'stock'];
 
+    public function Clientes(){
+        return $this->belongsToMany(Cliente::class, 'cliente_products', 'product_id', 'cliente_id');
+    }
+
+    public function Provedors(){
+        return $this->belongsTo('App\Models\Provedor');
+    }
 
 }
